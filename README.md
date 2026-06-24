@@ -349,7 +349,105 @@ Cloudflare
 recipient
 raw
 ```
+### Cloudflare Email Worker Setup
 
+If you are using Cloudflare Email Routing for inbound ticket replies, create an Email Worker that forwards incoming emails to the Laravel webhook endpoint.
+
+After creating the Email Worker, open the code editor and replace the worker code with the following.
+
+**Important:** Update these two values before deploying:
+
+1. Replace:
+
+```
+https://yourdomain.com/webhooks/inbound-email
+```
+
+with your actual Laravel webhook URL.
+
+If your app is installed in a subdirectory, include it:
+
+```
+https://yourdomain.com/folder-name/webhooks/inbound-email
+```
+
+2. Replace:
+
+```
+X-Webhook-Secret
+```
+
+with the same value configured in your Laravel `.env` file:
+
+```env
+INBOUND_WEBHOOK_SECRET=xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
+```
+
+Cloudflare Email Worker:
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    return new Response("Inbound Email Worker Running");
+  },
+
+  async email(message, env, ctx) {
+    try {
+
+      // Entire RFC822 message
+      const rawEmail = await new Response(message.raw).text();
+
+      const payload = {
+        recipient: message.to,
+        raw: rawEmail
+      };
+
+      const response = await fetch(
+        "https://yourdomain.com/webhooks/inbound-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Webhook-Secret": "xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx"
+          },
+          body: JSON.stringify(payload)
+        }
+      );
+
+      if (!response.ok) {
+        const text = await response.text();
+
+        console.error(
+          `Laravel returned ${response.status}: ${text}`
+        );
+
+        throw new Error(
+          `Webhook failed (${response.status})`
+        );
+      }
+
+      console.log("Inbound email successfully forwarded.");
+
+    } catch (err) {
+
+      console.error(
+        "Cloudflare Email Worker Error:",
+        err.stack || err.message
+      );
+
+      throw err;
+    }
+  }
+};
+```
+
+After saving the worker:
+
+1. Click **Deploy**
+2. Return to **Email Routing**
+3. Add the worker as the destination for your support reply domain
+4. Send a test email to verify the Laravel ticket reply is created
+5. 
 ---
 
 # Social Login Setup
@@ -577,6 +675,21 @@ php artisan optimize:clear
 | `/admin/tickets/{id}` | Ticket management |
 | `/profile` | User profile |
 
+---
+
+## Production Checklist
+
+Before deploying:
+
+- [ ] Set APP_ENV=production
+- [ ] Set APP_DEBUG=false
+- [ ] Configure database credentials
+- [ ] Configure mail provider
+- [ ] Configure reCAPTCHA keys (optional)
+- [ ] Configure Social Login credentials (if using)
+- [ ] Set INBOUND_WEBHOOK_SECRET
+- [ ] Run php artisan optimize
+- [ ] Run npm run build
 
 ---
 
