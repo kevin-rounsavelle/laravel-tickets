@@ -457,7 +457,7 @@ Supports:
 - Facebook
 
 
-Install credentials through:
+Generate your domain's social login app credentials through:
 
 - Google Developer Console
 - Meta Developer Console
