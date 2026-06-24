@@ -21,9 +21,11 @@
     </head>
     <body class="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-indigo-500 selection:text-white">
         <div class="min-h-screen bg-[#f8fafc] relative overflow-hidden flex flex-col justify-between">
-            <!-- Decorative Background Glows -->
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-violet-200/20 rounded-full blur-3xl pointer-events-none"></div>
+ <div class="fixed inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-indigo-900/40 to-violet-800/30 blur-3xl opacity-60"></div>
+
+    <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-950/50 to-purple-900/30 blur-3xl opacity-50"></div>
+</div>
             
             <div class="relative z-10 flex-1">
                 <!-- Simple Header -->

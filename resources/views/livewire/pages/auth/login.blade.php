@@ -63,9 +63,11 @@ new #[Layout('layouts.guest')] class extends Component
         @submit.prevent="submitForm"
     >
         <input type="hidden" wire:model="recaptchaToken">
+
         <!-- Email Address -->
         <div>
             <label for="email" class="auth-label">Email Address</label>
+
             <input wire:model="form.email"
                    id="email"
                    type="email"
@@ -75,8 +77,11 @@ new #[Layout('layouts.guest')] class extends Component
                    autocomplete="username"
                    placeholder="you@example.com"
                    class="auth-input block w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none" />
+
             @error('form.email')
-                <p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rose-300 bg-rose-950/40 border border-rose-500/30 px-2 py-1 rounded-md">
+                    {{ $message }}
+                </p>
             @enderror
         </div>
 
@@ -84,12 +89,14 @@ new #[Layout('layouts.guest')] class extends Component
         <div>
             <div class="flex items-center justify-between mb-1">
                 <label for="password" class="auth-label" style="margin-bottom:0;">Password</label>
+
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="auth-link text-xs">
                         Forgot password?
                     </a>
                 @endif
             </div>
+
             <input wire:model="form.password"
                    id="password"
                    type="password"
@@ -98,8 +105,11 @@ new #[Layout('layouts.guest')] class extends Component
                    autocomplete="current-password"
                    placeholder="••••••••"
                    class="auth-input block w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none" />
+
             @error('form.password')
-                <p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>
+                <p class="mt-1.5 text-xs text-rose-300 bg-rose-950/40 border border-rose-500/30 px-2 py-1 rounded-md">
+                    {{ $message }}
+                </p>
             @enderror
         </div>
 
@@ -110,6 +120,7 @@ new #[Layout('layouts.guest')] class extends Component
                    type="checkbox"
                    name="remember"
                    class="checkbox-custom rounded">
+
             <label for="remember" class="text-sm text-slate-400 cursor-pointer select-none">
                 Keep me signed in
             </label>
@@ -118,6 +129,7 @@ new #[Layout('layouts.guest')] class extends Component
         <!-- Submit -->
         <button type="submit" class="auth-btn w-full mt-2">
             <span wire:loading.remove wire:target="login">Sign In</span>
+
             <span wire:loading wire:target="login" class="flex items-center justify-center gap-2">
                 <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -142,6 +154,7 @@ new #[Layout('layouts.guest')] class extends Component
             </svg>
             Google
         </a>
+
         <a href="{{ route('social.redirect', 'facebook') }}" class="social-btn">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#1877F2">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
