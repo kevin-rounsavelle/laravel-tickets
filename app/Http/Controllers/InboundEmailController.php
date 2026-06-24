@@ -87,7 +87,7 @@ class InboundEmailController extends Controller
     /**
      * Unified payload parser:
      * - Mailgun
-     * - SendGrid
+     * - PostMark
      * - Cloudflare (MIME)
      */
     private function parsePayload(Request $request): ?array
@@ -120,7 +120,7 @@ class InboundEmailController extends Controller
 
         /*
         --------------------------------------------------------
-        2. SENDGRID (unchanged)
+        2. POSTMARK (unchanged)
         --------------------------------------------------------
         */
         if ($request->has('FromFull') || $request->has('from')) {
