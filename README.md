@@ -529,7 +529,7 @@ DocumentRoot /var/www/example-com/main-site/public
 AllowOverride All
 </Directory>
 
-Alias /folder-name /var/www/example-com/laravel-app/public
+Alias /support /var/www/example-com/laravel-app/public
 <Directory /var/www/example-com/laravel-app/public>
 AllowOverride All
 Require all granted
@@ -547,7 +547,7 @@ Require all granted
 ServerName example.com
 DocumentRoot /var/www/example-com/main-site/public
 
-Alias /folder-name /var/www/example-com/laravel-app/public
+Alias /support /var/www/example-com/laravel-app/public
 <Directory /var/www/example-com/laravel-app/public>
 AllowOverride All
 Require all granted
@@ -577,6 +577,7 @@ RewriteEngine On
 RewriteBase /support/
 ```
 
+(/support/) is used as an example folder name only. Replace with your actual folder name (alias) on your domain.
 
 ---
 
