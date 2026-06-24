@@ -24,23 +24,85 @@ Designed for SaaS applications and support teams requiring a complete customer s
 
 ## Installation
 
-This application is a standard Laravel 13 application. Follow the steps below to install a local copy.
+This application is a standard Laravel 13 application using Livewire, Volt, and Tailwind CSS.
 
 ### Requirements
 
+Before installing, make sure you have:
+
 - PHP 8.3+
 - Composer
-- Node.js & npm
+- Node.js and npm
 - MySQL / MariaDB (or compatible database)
 
-### Install
+### Setup
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/kevin-rounsavelle/laravel-tickets.git
+```
 
+Enter the application directory:
+
+```bash
 cd laravel-tickets
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Create your environment file:
+
+```bash
+cp .env.example .env
+```
+
+Configure your database settings in `.env`, then generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+Clear Laravel caches:
+
+```bash
+php artisan optimize:clear
+```
+
+Run database migrations and seed demo data:
+
+```bash
+php artisan migrate --seed
+```
+
+Create the storage symlink:
+
+```bash
+php artisan storage:link
+```
+
+Install frontend dependencies and compile assets:
+
+```bash
+npm install
+npm run build
+```
+
+Start the development server:
+
+```bash
+php artisan serve
+```
+
+The application will be available at:
+
+```text
+http://localhost:8000
+```
 
 # Features
 
