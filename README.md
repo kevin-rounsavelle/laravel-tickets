@@ -447,7 +447,6 @@ After saving the worker:
 2. Return to **Email Routing**
 3. Add the worker as the destination for your support reply domain
 4. Send a test email to verify the Laravel ticket reply is created
-5. 
 ---
 
 # Social Login Setup
