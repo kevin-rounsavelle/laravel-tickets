@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => 'Support Admin',
             'email' => 'admin@support.local',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Password123#'),
             'is_admin' => true,
             'email_verified_at' => now(),
         ]);
@@ -24,13 +24,13 @@ class DatabaseSeeder extends Seeder
         $agent = User::factory()->create([
             'name' => 'Agent Smith',
             'email' => 'agent@support.local',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Password123#'),
             'is_admin' => true,
             'email_verified_at' => now(),
         ]);
 
         $customers = User::factory(5)->create([
-            'password' => Hash::make('password'),
+            'password' => Hash::make('Password123#'),
             'email_verified_at' => now(),
         ]);
 
