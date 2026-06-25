@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
     'ticket_id',
     'ticket_reply_id',
     'filename',
+    'disk',
     'original_name',
     'mime_type',
     'size',
@@ -29,7 +30,11 @@ class TicketAttachment extends Model
 
     public function url(): string
     {
-        return Storage::disk('public')->url($this->filename);
+        if ($this->disk === 's3') {
+            return rtrim(config('app.cdn_url'), '/') . '/' . ltrim($this->filename, '/');
+        }
+
+        return Storage::disk($this->disk)->url($this->filename);
     }
 
     public function isImage(): bool

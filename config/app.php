@@ -56,6 +56,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | CDN URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used for publicly accessible assets that are served through
+    | a CDN or external asset host. This allows files such as ticket
+    | attachments to be stored on remote storage while being delivered from
+    | a CDN endpoint.
+    |
+    | Examples:
+    | - CloudFront distribution URL
+    | - Cloudflare CDN URL
+    | - Cloudflare R2 custom domain
+    |
+    | Leave empty to use the application's own URL/storage path.
+    |
+    */
+
+    'cdn_url' => env('CDN_URL'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

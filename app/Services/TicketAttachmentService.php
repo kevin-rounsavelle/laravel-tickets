@@ -20,16 +20,22 @@ class TicketAttachmentService
             if (! $file instanceof UploadedFile) {
                 continue;
             }
+        
+            $disk = match (config('filesystems.default')) {
+                's3' => 's3',
+                default => 'public',
+            };
 
-            $filename = $file->store('ticket-attachments/'.$ticket->id, 'public');
+        $path = $file->store('ticket-attachments/'.$ticket->id, $disk);
 
-            TicketAttachment::create([
-                'ticket_id' => $ticket->id,
-                'ticket_reply_id' => $reply?->id,
-                'filename' => $filename,
-                'original_name' => $file->getClientOriginalName(),
-                'mime_type' => $file->getMimeType() ?? 'application/octet-stream',
-                'size' => $file->getSize() ?? 0,
+        TicketAttachment::create([
+            'ticket_id' => $ticket->id,
+            'ticket_reply_id' => $reply?->id,
+            'filename' => $path,
+            'disk' => $disk,
+            'original_name' => $file->getClientOriginalName(),
+            'mime_type' => $file->getMimeType() ?? 'application/octet-stream',
+            'size' => $file->getSize() ?? 0,
             ]);
         }
     }

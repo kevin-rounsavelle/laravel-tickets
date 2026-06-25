@@ -335,14 +335,6 @@ FromFull
 TextBody
 ```
 
-Postmark:
-
-```
-ToFull
-FromFull
-TextBody
-```
-
 Cloudflare
 
 ```
@@ -447,6 +439,18 @@ After saving the worker:
 2. Return to **Email Routing**
 3. Add the worker as the destination for your support reply domain
 4. Send a test email to verify the Laravel ticket reply is created
+---
+
+### File Upload Configuration to CDN (S3 | Cloudfront)
+
+Set s3 as the filesystem (upload destination) in .env
+
+FILESYSTEM_DISK=s3 
+
+Enter the URL to your S3 bucket or CloudFront distribution domain under:
+
+CDN_URL=https://abc123456.cloudfront.net
+
 ---
 
 # Social Login Setup
