@@ -78,10 +78,11 @@ new #[Layout('layouts.guest')] class extends Component
                    placeholder="you@example.com"
                    class="auth-input block w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none" />
 
-            @error('form.email')
-                <p class="mt-1.5 text-xs text-rose-300 bg-rose-950/40 border border-rose-500/30 px-2 py-1 rounded-md">
+             @error('form.email')
+                <div class="mt-2 rounded-lg border-2 border-red-500 bg-black px-3 py-2 text-sm font-semibold text-white shadow-lg">
+                    <span class="text-red-400">⚠</span>
                     {{ $message }}
-                </p>
+                </div>
             @enderror
         </div>
 
@@ -107,9 +108,10 @@ new #[Layout('layouts.guest')] class extends Component
                    class="auth-input block w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none" />
 
             @error('form.password')
-                <p class="mt-1.5 text-xs text-rose-300 bg-rose-950/40 border border-rose-500/30 px-2 py-1 rounded-md">
+                <div class="mt-2 rounded-lg border-2 border-red-500 bg-black px-3 py-2 text-sm font-semibold text-white shadow-lg">
+                    <span class="text-red-400">⚠</span>
                     {{ $message }}
-                </p>
+                </div>
             @enderror
         </div>
 
