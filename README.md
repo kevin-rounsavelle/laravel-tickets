@@ -61,7 +61,7 @@ Create your environment file:
 cp .env.example .env
 ```
 
-Configure your database settings in `.env`, then generate the Laravel application key:
+Configure your database settings in `.env`, then set your mail provider, OAuth credentials (optional), and webhook settings. Then generate the Laravel application key:
 
 ```bash
 php artisan key:generate
@@ -585,17 +585,6 @@ RewriteBase /support/
 
 ---
 
-## Environment Setup
-
-Copy:
-
-.env.example
-
-to:
-
-.env
-
-Then configure your database, mail provider, OAuth credentials, and webhook settings.
 
 # Environment Configuration
 
