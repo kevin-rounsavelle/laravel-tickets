@@ -231,16 +231,6 @@ Supported providers:
 
 ---
 
-# Requirements
-
-- PHP 8.3+
-- Composer
-- Node.js
-- npm
-
-
----
-
 
 # Demo Accounts
 
