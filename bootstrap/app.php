@@ -11,6 +11,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        /*
+         * Trust reverse proxies (Cloudflare, load balancers, etc.)
+         * so Laravel correctly detects HTTPS requests.
+         *
+         * Without this, signed URLs (Livewire uploads, password resets,
+         * email verification, etc.) may incorrectly generate http:// URLs
+         * when the original request was HTTPS.
+         */
+        $middleware->trustProxies(at: '*');
+
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
