@@ -610,16 +610,9 @@ $handle
 
 ---
 
-# Publish Livewire Config
+# Edit Livewire Config
 
-Run:
-
-```bash
-php artisan livewire:publish --config
-```
-
-
-Add:
+Add the following to config/livewire.php
 
 ```php
 'asset_url' => env('APP_URL') . '/livewire/livewire.js',
