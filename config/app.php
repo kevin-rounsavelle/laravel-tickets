@@ -54,6 +54,18 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+         /*
+    |--------------------------------------------------------------------------
+    | Livewire Subfolder
+    |--------------------------------------------------------------------------
+    |
+    | Subfolder declaration for operating this install in a subdirectory /
+    | alias off the root domain.
+    |
+    */   
+
+    'livewire_subdirectory' => env('LIVEWIRE_SUBDIRECTORY', null),
+
     /*
     |--------------------------------------------------------------------------
     | CDN URL

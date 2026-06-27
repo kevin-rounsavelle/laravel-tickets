@@ -183,4 +183,18 @@ return [
     */
 
     'release_token' => 'a',
+
+    /*
+    |---------------------------------------------------------------------------
+    | LIVEWIRE ASSET LOAD
+    |---------------------------------------------------------------------------
+    |
+    | The declaration below is required for the install to work both in 
+    | root and in an alias (subfolder) of the root domain.
+    | if using subfolder, make sure that folder is set in .env for APP_URL.
+    |
+    */
+
+    'asset_url' => env('APP_URL') . '/livewire/livewire.js', 
+    
 ];
