@@ -497,6 +497,26 @@ https://example.com/support
 
 Livewire requires additional configuration when running behind a domain alias. '/support' is used as an example folder name only. Replace with your actual folder name (alias) on your domain.
 
+# Environment Configuration
+
+Update:
+
+```env
+
+APP_URL=https://example.com/support
+
+ASSET_URL=https://example.com/support
+
+LIVEWIRE_SUBDIRECTORY=/support
+
+```
+
+Clear cache:
+
+```bash
+php artisan optimize:clear
+```
+
 ---
 
 # Recommended Apache Alias Setup
@@ -557,67 +577,6 @@ Add:
 ```apache
 RewriteEngine On
 RewriteBase /support/
-```
-
-# Environment Configuration
-
-Update:
-
-```env
-APP_URL=https://example.com/support
-
-ASSET_URL=https://example.com/support
-```
-
-
----
-
-# Livewire Subdirectory Route
-
-Edit:
-
-```
-app/Providers/AppServiceProvider.php
-```
-
-
-Add:
-
-```php
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Route;
-```
-
-
-Inside boot():
-
-```php
-Livewire::setUpdateRoute(function ($handle) {
-
-return Route::post(
-'/support/livewire/update',
-$handle
-);
-
-});
-```
-
-
----
-
-# Edit Livewire Config
-
-Add the following to config/livewire.php
-
-```php
-'asset_url' => env('APP_URL') . '/livewire/livewire.js',
-```
-
-
-Clear cache:
-
-```bash
-php artisan optimize:clear
 ```
 
 ---
