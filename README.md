@@ -495,7 +495,7 @@ https://example.com/support
 ```
 
 
-Livewire requires additional configuration when running behind a domain alias.
+Livewire requires additional configuration when running behind a domain alias. '/support' is used as an example folder name only. Replace with your actual folder name (alias) on your domain.
 
 ---
 
@@ -558,11 +558,6 @@ Add:
 RewriteEngine On
 RewriteBase /support/
 ```
-
-(/support/) is used as an example folder name only. Replace with your actual folder name (alias) on your domain.
-
----
-
 
 # Environment Configuration
 
