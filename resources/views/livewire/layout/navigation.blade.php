@@ -23,7 +23,7 @@ new class extends Component
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate class="flex items-center gap-2 group">
+                    <a href="{{ url('/') }}" class="flex items-center gap-2 group">
                         <span class="inline-flex items-center justify-center p-2 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-100 group-hover:scale-105 transition-transform">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -47,6 +47,9 @@ new class extends Component
                         </x-nav-link>
                         <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users*')" wire:navigate class="text-sm font-semibold transition-all">
                             {{ __('Users') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.kb.index')" :active="request()->routeIs('admin.kb.*')" wire:navigate class="text-sm font-semibold transition-all">
+                            {{ __('Knowledge Base') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -113,6 +116,9 @@ new class extends Component
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users*')" wire:navigate>
                     {{ __('Users') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.kb.index')" :active="request()->routeIs('admin.kb.*')" wire:navigate>
+                    {{ __('Knowledge Base') }}
                 </x-responsive-nav-link>
             @endif
         </div>

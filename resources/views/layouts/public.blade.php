@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
+        @if(isset($metaDescription))
+            <meta name="meta_description" content="{{ $metaDescription }}">
+        @endif
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,24 +24,26 @@
     </head>
     <body class="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-indigo-500 selection:text-white">
         <div class="min-h-screen bg-[#f8fafc] relative overflow-hidden flex flex-col justify-between">
- <div class="fixed inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-indigo-900/40 to-violet-800/30 blur-3xl opacity-60"></div>
+            @if(!request()->routeIs('kb.*'))
+            <div class="fixed inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-indigo-900/40 to-violet-800/30 blur-3xl opacity-60"></div>
 
-    <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-950/50 to-purple-900/30 blur-3xl opacity-50"></div>
-</div>
+                <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-950/50 to-purple-900/30 blur-3xl opacity-50"></div>
+            </div>
+            @endif
             
             <div class="relative z-10 flex-1">
                 <!-- Simple Header -->
                 <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center justify-center p-2 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-200">
+                        <a href="{{ url('/') }}" class="flex items-center gap-2 group">
+                            <span class="inline-flex items-center justify-center p-2 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-200 group-hover:scale-105 transition-transform">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                                 </svg>
                             </span>
                             <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent">{{ config('app.name') }}</span>
-                        </div>
+                        </a>
                         <div>
                             @auth
                                 <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition-colors">
@@ -60,9 +65,7 @@
                 </main>
             </div>
             
-            <footer class="relative z-10 border-t border-slate-200/50 bg-white/40 py-6 text-center text-xs text-slate-500">
-                <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-            </footer>
+            @include('layouts.footer')
         </div>
     </body>
 </html>

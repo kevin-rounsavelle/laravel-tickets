@@ -142,6 +142,22 @@ Administrators can manage all accounts on the platform:
 
 ---
 
+## Knowledge Base (KB)
+
+The platform includes a fully featured Knowledge Base to provide self-service help for customers:
+
+- **Public KB Landing Page:** Clean, searchable interface featuring a top-level category browser with nested articles, and a dedicated "Top 15 Most Popular" cards section based on helpfulness ratings.
+- **Helpfulness Ratings:** Customers can upvote or downvote articles ("Was this article helpful?") using a session-secured tracking system to prevent duplicate votes.
+- **Categories:** Organize articles into specific topics, complete with custom sort ordering for both categories and their nested articles.
+- **Admin KB Management:**
+  - Full CRUD operations for KB Articles and Categories.
+  - Integrated, self-hosted TinyMCE rich-text editor for article composition.
+  - Custom sort ordering to control public display priorities.
+  - Toggle publication dates on/off per article.
+  - Draft/Active visibility toggles for easy content management.
+
+---
+
 ## Ticket Status Workflow
 
 Supported statuses:
@@ -513,26 +529,6 @@ https://example.com/support
 
 Livewire requires additional configuration when running behind a domain alias. '/support' is used as an example folder name only. Replace with your actual folder name (alias) on your domain.
 
-# Subdirectory Environment Configuration
-
-Update:
-
-```env
-
-APP_URL=https://example.com/support
-
-ASSET_URL=https://example.com/support
-
-LIVEWIRE_SUBDIRECTORY=/support
-
-```
-
-Clear cache:
-
-```bash
-php artisan optimize:clear
-```
-
 ---
 
 # Recommended Apache Alias Setup
@@ -594,6 +590,67 @@ RewriteEngine On
 RewriteBase /support/
 ```
 
+# Environment Configuration
+
+Update:
+
+```env
+APP_URL=https://example.com/support
+
+ASSET_URL=https://example.com/support
+```
+
+
+---
+
+# Livewire Subdirectory Route
+
+Edit:
+
+```
+app/Providers/AppServiceProvider.php
+```
+
+
+Add:
+
+```php
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Route;
+```
+
+
+Inside boot():
+
+```php
+Livewire::setUpdateRoute(function ($handle) {
+
+return Route::post(
+'/support/livewire/update',
+$handle
+);
+
+});
+```
+
+
+---
+
+# Edit Livewire Config
+
+Add the following to config/livewire.php
+
+```php
+'asset_url' => env('APP_URL') . '/livewire/livewire.js',
+```
+
+
+Clear cache:
+
+```bash
+php artisan optimize:clear
+```
+
 ---
 
 # Routes
@@ -609,6 +666,12 @@ RewriteBase /support/
 | `/admin/users` | Admin user directory |
 | `/admin/users/create` | Admin user creation form |
 | `/admin/users/{id}/edit` | Admin user edit profile & role |
+| `/admin/kb` | Admin KB articles management |
+| `/admin/kb/categories` | Admin KB category management |
+| `/admin/kb/create` | Admin create KB article |
+| `/admin/kb/{id}/edit` | Admin edit KB article |
+| `/kb` | Public Knowledge Base landing page |
+| `/kb/{seo_link}` | Public Knowledge Base article view |
 | `/profile` | User profile |
 
 ---

@@ -6,9 +6,15 @@ use App\Http\Controllers\TicketAttachmentController;
 use App\Livewire\AdminCreateUser;
 use App\Livewire\AdminDashboard;
 use App\Livewire\AdminEditUser;
+use App\Livewire\AdminKbCategories;
+use App\Livewire\AdminKbCreate;
+use App\Livewire\AdminKbEdit;
+use App\Livewire\AdminKbIndex;
 use App\Livewire\AdminTicketShow;
 use App\Livewire\AdminUsers;
 use App\Livewire\CreateTicket;
+use App\Livewire\KbArticleShow;
+use App\Livewire\KbLanding;
 use App\Livewire\PublicTicketView;
 use App\Livewire\ShowTicket;
 use App\Livewire\UserDashboard;
@@ -20,6 +26,9 @@ Route::get('tickets/view/{token}', PublicTicketView::class)->name('tickets.publi
 
 Route::post('webhooks/inbound-email', InboundEmailController::class)
     ->name('webhooks.inbound-email');
+
+Route::get('kb', KbLanding::class)->name('kb.index');
+Route::get('kb/{seo_link}', KbArticleShow::class)->name('kb.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', UserDashboard::class)->name('dashboard');
@@ -36,6 +45,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('users', AdminUsers::class)->name('users');
         Route::get('users/create', AdminCreateUser::class)->name('users.create');
         Route::get('users/{user}/edit', AdminEditUser::class)->name('users.edit');
+
+        Route::get('kb', AdminKbIndex::class)->name('kb.index');
+        Route::get('kb/categories', AdminKbCategories::class)->name('kb.categories');
+        Route::get('kb/create', AdminKbCreate::class)->name('kb.create');
+        Route::get('kb/{article}/edit', AdminKbEdit::class)->name('kb.edit');
     });
 });
 

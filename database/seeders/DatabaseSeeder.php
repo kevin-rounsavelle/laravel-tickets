@@ -88,5 +88,10 @@ class DatabaseSeeder extends Seeder
             'status' => TicketStatus::Closed,
             'assigned_to' => $agent->id,
         ]);
+
+        $this->call([
+            KbCategorySeeder::class,
+            KbArticleSeeder::class,
+        ]);
     }
 }

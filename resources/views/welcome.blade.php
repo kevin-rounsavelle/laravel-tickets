@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,21 +34,24 @@
                         <span class="text-xl font-bold tracking-tight text-white">{{ config('app.name', 'Support Tickets') }}</span>
                     </div>
 
-                    <nav class="flex items-center gap-4">
+                    <nav class="flex items-center gap-2 sm:gap-4 flex-wrap justify-end">
+                        <div class="w-full sm:w-64 lg:w-80 order-last sm:order-none mt-4 sm:mt-0">
+                            <livewire:kb-search-bar />
+                        </div>
+                        
+                        <a href="{{ route('kb.index') }}" class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-500 transition-all hover:scale-105 active:scale-95">
+                            Knowledge Base
+                        </a>
+
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ route('dashboard') }}" class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-500 transition-all hover:scale-105 active:scale-95">
+                                <a href="{{ route('dashboard') }}" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
                                     Dashboard
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
                                     Sign In
                                 </a>
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-900/40 hover:bg-indigo-500 transition-all hover:scale-105 active:scale-95">
-                                        Get Started
-                                    </a>
-                                @endif
                             @endauth
                         @endif
                     </nav>
@@ -71,6 +74,9 @@
                         </h1>
                         <p class="mt-6 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
                             Submit support tickets instantly, upload screenshots, get real-time email notifications, and reply seamlessly either via email or our secure dashboard.
+                        </p>
+                        <p class="mt-2 text-base text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium">
+                            Plus, empower your customers to find answers instantly with our built-in, search-driven Knowledge Base.
                         </p>
                     </div>
 
@@ -139,9 +145,7 @@
             </main>
 
             <!-- Footer -->
-            <footer class="border-t border-white/5 py-8 text-center text-xs text-slate-500">
-                <p>&copy; {{ date('Y') }} {{ config('app.name', 'Support Tickets') }}. All rights reserved.</p>
-            </footer>
+            @include('layouts.footer')
         </div>
     </body>
 </html>
