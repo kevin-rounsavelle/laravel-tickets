@@ -3,7 +3,7 @@
 A modern customer support and helpdesk ticketing platform built with:
 
 - Laravel 13
-- Livewire 3
+- Livewire v3.8.1
 - Livewire Volt
 - Tailwind CSS
 - Laravel Socialite
