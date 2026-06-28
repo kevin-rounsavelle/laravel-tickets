@@ -206,6 +206,46 @@
                             </button>
                         </div>
                     </div>
+
+                    {{-- Danger Zone --}}
+                    <div class="bg-white border border-rose-200 shadow-sm rounded-2xl p-6"
+                         x-data="{ confirming: false }">
+                        <h3 class="font-bold text-rose-700 text-base pb-3 border-b border-rose-100 mb-4">Danger Zone</h3>
+
+                        <div x-show="!confirming">
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                                Permanently delete this ticket. This action cannot be undone and will remove all replies and attachments.
+                            </p>
+                            <button @click="confirming = true"
+                                    class="w-full inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold border border-rose-200 text-rose-600 hover:bg-rose-50 transition-all">
+                                <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                Delete Ticket
+                            </button>
+                        </div>
+
+                        <div x-show="confirming" x-cloak class="space-y-3">
+                            <p class="text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 rounded-xl p-3 text-center leading-relaxed">
+                                Are you sure? This cannot be undone.
+                            </p>
+                            <div class="flex gap-2">
+                                <button @click="confirming = false"
+                                        class="flex-1 inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all">
+                                    Cancel
+                                </button>
+                                <button wire:click="deleteTicket" wire:loading.attr="disabled"
+                                        class="flex-1 inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-semibold bg-rose-600 hover:bg-rose-500 text-white transition-all">
+                                    <span wire:loading.remove wire:target="deleteTicket">Confirm Delete</span>
+                                    <span wire:loading wire:target="deleteTicket" class="flex items-center gap-1">
+                                        <svg class="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Deleting...
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

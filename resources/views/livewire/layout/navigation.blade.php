@@ -39,11 +39,14 @@ new class extends Component
                         {{ __('My Tickets') }}
                     </x-nav-link>
                     @if (auth()->user()->isAdmin())
-                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')" wire:navigate class="text-sm font-semibold transition-all text-violet-600">
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard') || request()->routeIs('admin.tickets.*')" wire:navigate class="text-sm font-semibold transition-all text-violet-600">
                             <span class="flex items-center gap-1.5">
                                 <span class="h-1.5 w-1.5 rounded-full bg-violet-600"></span>
                                 {{ __('Admin Console') }}
                             </span>
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users*')" wire:navigate class="text-sm font-semibold transition-all">
+                            {{ __('Users') }}
                         </x-nav-link>
                     @endif
                 </div>
@@ -105,8 +108,11 @@ new class extends Component
                 {{ __('My Tickets') }}
             </x-responsive-nav-link>
             @if (auth()->user()->isAdmin())
-                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')" wire:navigate class="text-violet-600">
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard') || request()->routeIs('admin.tickets.*')" wire:navigate class="text-violet-600">
                     {{ __('Admin Console') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users*')" wire:navigate>
+                    {{ __('Users') }}
                 </x-responsive-nav-link>
             @endif
         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserRole;
 use Database\Factories\UserFactory;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'is_admin', 'provider', 'provider_id'])]
+#[Fillable(['name', 'email', 'password', 'role_id', 'provider', 'provider_id'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -23,9 +24,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'is_admin' => 'boolean',
+            'password'          => 'hashed',
+            'role_id'           => UserRole::class,
         ];
+    }
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(UserRole::class, 'role_id');
     }
 
     public function tickets(): HasMany
@@ -45,7 +51,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-        return (bool) $this->is_admin;
+        return $this->role_id === UserRole::Admin;
+    }
+
+    public function isAgent(): bool
+    {
+        return $this->role_id === UserRole::Agent;
+    }
+
+    public function isStaff(): bool
+    {
+        return in_array($this->role_id, [UserRole::Agent, UserRole::Admin]);
     }
 
     /**

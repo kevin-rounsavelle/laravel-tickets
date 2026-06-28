@@ -13,6 +13,7 @@ Designed for SaaS applications and support teams requiring a complete customer s
 
 - User dashboard
 - Administrator dashboard
+- User management & role assignment
 - Team member assignment
 - Email-based ticket replies
 - Secure guest ticket access
@@ -123,6 +124,20 @@ Support administrators can:
 - Manage ticket workflow
 - Update ticket statuses
 - Monitor incoming email replies
+- Delete tickets permanently (gated to admins only; automatically cleans up replies and deletes attachments from storage)
+
+
+---
+
+## User Management (Admin Only)
+
+Administrators can manage all accounts on the platform:
+
+- User Directory: View all registered users with pagination, live search (by name/email), and role filters.
+- Add New Users: Directly register users with predefined roles. Manually added users are automatically marked as email-verified (`email_verified_at` populated immediately).
+- Edit Profiles: Update name, email, and optionally reset/change user passwords.
+- Assign Roles: Promote or demote users between *User* (regular customer), *Team Member* (support agent), and *Admin* (full access) using database-driven role IDs.
+- Delete Accounts: Permanently remove users from the platform (with built-in protection blocking admins from deleting their own logged-in account).
 
 
 ---
@@ -227,6 +242,7 @@ Supported providers:
 | Build Tool | Vite |
 | Database | Laravel Supported Databases |
 | Email | Webhook Based Processing |
+| User Roles | DB-driven `user_roles` lookup table |
 
 
 ---
@@ -540,7 +556,6 @@ SSLCertificateFile /etc/pki/tls/certs/example.crt
 SSLCertificateKeyFile /etc/pki/tls/private/example.key
 </VirtualHost>
 ```
-```
 
 ---
 
@@ -630,8 +645,11 @@ php artisan optimize:clear
 | `/tickets/create` | Create ticket |
 | `/tickets/{id}` | Authenticated ticket view |
 | `/tickets/view/{token}` | Secure guest ticket view |
-| `/admin/tickets` | Admin dashboard |
-| `/admin/tickets/{id}` | Ticket management |
+| `/admin/tickets` | Admin dashboard (tickets list) |
+| `/admin/tickets/{id}` | Ticket management & replies |
+| `/admin/users` | Admin user directory |
+| `/admin/users/create` | Admin user creation form |
+| `/admin/users/{id}/edit` | Admin user edit profile & role |
 | `/profile` | User profile |
 
 ---
@@ -681,6 +699,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Credits
-
-Built with Laravel, Livewire, Volt, Tailwind CSS, and modern PHP practices.
+```

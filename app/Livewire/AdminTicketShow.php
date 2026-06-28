@@ -4,11 +4,13 @@ namespace App\Livewire;
 
 use App\Enums\TicketStatus;
 use App\Models\Ticket;
+use App\Models\TicketAttachment;
 use App\Models\TicketReply;
 use App\Models\User;
 use App\Services\TicketAttachmentService;
 use App\Services\TicketNotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -105,10 +107,27 @@ class AdminTicketShow extends Component
         session()->flash('status', 'Admin reply posted.');
     }
 
+    public function deleteTicket(): void
+    {
+        abort_unless(auth()->user()->isAdmin(), 403);
+
+        // Delete all attached files from storage
+        $this->ticket->attachments->each(function (TicketAttachment $attachment) {
+            Storage::disk($attachment->disk ?? 'local')->delete($attachment->filename);
+        });
+
+        $ticketId = $this->ticket->id;
+        $this->ticket->delete();
+
+        session()->flash('status', "Ticket #{$ticketId} has been deleted.");
+
+        $this->redirectRoute('admin.dashboard', navigate: true);
+    }
+
     public function render(): View
     {
         return view('livewire.admin-ticket-show', [
-            'admins' => User::query()->where('is_admin', true)->orderBy('name')->get(),
+            'admins'   => User::query()->whereIn('role_id', [\App\Enums\UserRole::Agent->value, \App\Enums\UserRole::Admin->value])->orderBy('name')->get(),
             'statuses' => TicketStatus::cases(),
         ]);
     }

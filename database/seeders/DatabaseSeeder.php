@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Support Admin',
             'email' => 'admin@support.local',
             'password' => Hash::make('SampleUser12345#'),
-            'is_admin' => true,
+            'role_id' => \App\Enums\UserRole::Admin->value,
             'email_verified_at' => now(),
         ]);
 
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Agent Smith',
             'email' => 'agent@support.local',
             'password' => Hash::make('SampleUser12345#'),
-            'is_admin' => true,
+            'role_id' => \App\Enums\UserRole::Agent->value,
             'email_verified_at' => now(),
         ]);
 
