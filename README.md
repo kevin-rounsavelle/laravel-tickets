@@ -44,10 +44,10 @@ Clone the repository:
 git clone https://github.com/kevin-rounsavelle/laravel-tickets.git
 ```
 
-Enter the application directory:
+Enter the application directory: (or your exact install directory path on your server)
 
 ```bash
-cd laravel-tickets
+cd laravel-tickets 
 ```
 
 Install PHP dependencies:
@@ -68,16 +68,16 @@ Configure your database settings in `.env`, then set your mail provider, OAuth c
 php artisan key:generate
 ```
 
-Clear Laravel caches:
-
-```bash
-php artisan optimize:clear
-```
-
 Run database migrations and seed demo data:
 
 ```bash
 php artisan migrate --seed
+```
+
+Clear Laravel caches:
+
+```bash
+php artisan optimize:clear
 ```
 
 Create the storage symlink:
