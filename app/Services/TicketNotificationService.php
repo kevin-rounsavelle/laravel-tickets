@@ -6,6 +6,7 @@ use App\Enums\TicketStatus;
 use App\Mail\TicketReplyReceivedMail;
 use App\Mail\TicketStatusUpdatedMail;
 use App\Mail\TicketSubmittedMail;
+use App\Mail\AdminTicketSubmittedMail;
 use App\Models\Ticket;
 use App\Models\TicketReply;
 use App\Models\User;
@@ -15,7 +16,17 @@ class TicketNotificationService
 {
     public function ticketSubmitted(Ticket $ticket): void
     {
+        // Notify the user
         Mail::to($ticket->user->email)->send(new TicketSubmittedMail($ticket));
+
+        // Notify admins and agents
+        $staffEmails = User::query()
+            ->whereIn('role_id', [2, 3])
+            ->pluck('email');
+
+        foreach ($staffEmails as $email) {
+            Mail::to($email)->send(new AdminTicketSubmittedMail($ticket));
+        }
     }
 
     public function statusUpdated(Ticket $ticket, TicketStatus $previousStatus): void
@@ -37,7 +48,7 @@ class TicketNotificationService
         }
 
         User::query()
-            ->where('is_admin', true)
+            ->whereIn('role_id', [2, 3])
             ->pluck('email')
             ->each(fn (string $email) => $recipients->push($email));
 
