@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-slate-50">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#f8fafc">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
@@ -23,7 +24,7 @@
         @endif
     </head>
     <body class="font-sans antialiased bg-slate-50 text-slate-900 selection:bg-indigo-500 selection:text-white">
-        <div class="min-h-screen bg-[#f8fafc] relative overflow-hidden flex flex-col justify-between">
+        <div class="min-h-[100dvh] bg-slate-50 relative overflow-hidden flex flex-col justify-between">
             @if(!request()->routeIs('kb.*'))
             <div class="fixed inset-0 overflow-hidden pointer-events-none">
                 <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-indigo-900/40 to-violet-800/30 blur-3xl opacity-60"></div>
@@ -65,7 +66,7 @@
                 </main>
             </div>
             
-            @include('layouts.footer')
+            @include('layouts.footer', ['theme' => 'light'])
         </div>
     </body>
 </html>

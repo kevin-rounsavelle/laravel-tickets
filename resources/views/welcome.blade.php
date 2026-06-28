@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth dark bg-[#090d16]">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#090d16">
         <title>{{ config('app.name', 'Support Ticketing') }} | Customer Support, Simplified</title>
 
         <!-- Fonts -->
@@ -21,7 +22,7 @@
     <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-950/50 to-purple-900/30 blur-3xl opacity-50"></div>
 </div>
 
-        <div class="min-h-screen flex flex-col justify-between relative">
+        <div class="min-h-[100dvh] flex flex-col justify-between relative">
             <!-- Navigation -->
             <header class="border-b border-white/5 bg-[#090d16]/70 backdrop-blur-md sticky top-0 z-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
@@ -145,7 +146,7 @@
             </main>
 
             <!-- Footer -->
-            @include('layouts.footer')
+            @include('layouts.footer', ['theme' => 'dark'])
         </div>
     </body>
 </html>
