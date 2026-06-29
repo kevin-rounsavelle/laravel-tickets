@@ -129,6 +129,18 @@ Support administrators can:
 
 ---
 
+## Team Member Dashboard
+
+Support team members (agents, role_id = 2) have a dedicated console:
+
+- **Assigned Tickets:** View only tickets specifically assigned to them.
+- **Search & Filter:** Search and filter their assigned queue by status.
+- **Reply to Customers:** View conversations and post replies to assigned tickets.
+- **Restricted Privileges:** Cannot delete tickets or view tickets assigned to other staff.
+
+
+---
+
 ## User Management (Admin Only)
 
 Administrators can manage all accounts on the platform:
@@ -674,7 +686,8 @@ php artisan optimize:clear
 | `/tickets/{id}` | Authenticated ticket view |
 | `/tickets/view/{token}` | Secure guest ticket view |
 | `/admin/tickets` | Admin dashboard (tickets list) |
-| `/admin/tickets/{id}` | Ticket management & replies |
+| `/admin/assigned-tickets` | Team member dashboard (assigned tickets list) |
+| `/admin/tickets/{id}` | Ticket management & replies (restricted to assigned agent if user is a Team Member) |
 | `/admin/users` | Admin user directory |
 | `/admin/users/create` | Admin user creation form |
 | `/admin/users/{id}/edit` | Admin user edit profile & role |
