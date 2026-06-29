@@ -473,21 +473,27 @@ After saving the worker:
 
 ### File Upload Configuration to CDN (S3 | Cloudfront)
 
-Set s3 as the filesystem (upload destination) in .env
+Set `s3` as the filesystem (upload destination) in `.env`:
 
-FILESYSTEM_DISK=s3 
+```env
+FILESYSTEM_DISK=s3
+```
 
-Enter your s3 bucket credentials in .env
+Enter your S3 bucket credentials in `.env`:
 
--AWS_ACCESS_KEY_ID=
--AWS_SECRET_ACCESS_KEY=
--AWS_DEFAULT_REGION={example us-east-1}
--AWS_BUCKET=
--AWS_USE_PATH_STYLE_ENDPOINT=false
+```env
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+AWS_USE_PATH_STYLE_ENDPOINT=false
+```
 
--Enter the URL to your S3 bucket or CloudFront distribution domain in .env under:
+Enter the URL to your S3 bucket or CloudFront distribution domain in `.env` under:
 
--CDN_URL=https://abc123456.cloudfront.net
+```env
+CDN_URL=https://abc123456.cloudfront.net
+```
 
 ---
 
