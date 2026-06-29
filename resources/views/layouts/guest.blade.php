@@ -24,14 +24,15 @@
     <div class="relative min-h-screen flex flex-col items-center justify-center px-4 py-10">
 
         <!-- Brand -->
-        <div class="mb-8 text-center">
-            <a href="{{ url('/') }}" class="inline-flex items-center gap-3 group">
-                <div class="brand-dot group-hover:scale-110 transition-transform"></div>
-                <span class="text-2xl font-bold tracking-tight text-white">
-                    Support<span class="text-indigo-400">Desk</span>
+        <div class="mb-8 flex flex-col items-center text-center">
+            <a href="{{ url('/') }}" class="flex flex-col items-center gap-3 group">
+                <span class="inline-flex items-center justify-center p-2 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white shadow-md shadow-indigo-900/30 group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
                 </span>
+                <span class="text-2xl font-bold tracking-tight text-white">{{ config('app.name', 'Support Tickets') }}</span>
             </a>
-            <p class="mt-2 text-slate-500 text-sm">Customer support, simplified.</p>
         </div>
 
         <!-- Card -->
