@@ -21,14 +21,38 @@ class SocialAuthController extends Controller
     {
         $this->validateProvider($provider);
 
-        return Socialite::driver($provider)->redirect();
+        $driver = Socialite::driver($provider);
+
+        if ($provider === 'github') {
+            $driver->scopes(['user:email']);
+        }
+
+        return $driver->redirect();
     }
 
     public function callback(string $provider): RedirectResponse
     {
         $this->validateProvider($provider);
 
-        $socialUser = Socialite::driver($provider)->user();
+        try {
+            $socialUser = Socialite::driver($provider)->user();
+        } catch (\Exception $e) {
+            return redirect()->route('login')->withErrors(['form.email' => 'Social login failed. Please try again.']);
+        }
+
+        $email = $socialUser->getEmail();
+
+        if (! $email) {
+            session([
+                'social_registration' => [
+                    'name' => $socialUser->getName() ?? $socialUser->getNickname() ?? 'User',
+                    'provider' => $provider,
+                    'provider_id' => $socialUser->getId(),
+                ]
+            ]);
+
+            return redirect()->route('auth.collect-email');
+        }
 
         $user = User::query()
             ->where('provider', $provider)
@@ -36,22 +60,27 @@ class SocialAuthController extends Controller
             ->first();
 
         if (! $user) {
-            $user = User::query()->where('email', $socialUser->getEmail())->first();
+            $user = User::query()->where('email', $email)->first();
 
             if ($user) {
                 $user->update([
                     'provider' => $provider,
                     'provider_id' => $socialUser->getId(),
                 ]);
+                if (is_null($user->email_verified_at)) {
+                    $user->email_verified_at = now();
+                    $user->save();
+                }
             } else {
-                $user = User::create([
+                $user = new User([
                     'name' => $socialUser->getName() ?? $socialUser->getNickname() ?? 'User',
-                    'email' => $socialUser->getEmail(),
+                    'email' => $email,
                     'password' => Hash::make(Str::random(32)),
                     'provider' => $provider,
                     'provider_id' => $socialUser->getId(),
-                    'email_verified_at' => now(),
                 ]);
+                $user->email_verified_at = now();
+                $user->save();
 
                 event(new Registered($user));
             }
@@ -64,6 +93,6 @@ class SocialAuthController extends Controller
 
     private function validateProvider(string $provider): void
     {
-        abort_unless(in_array($provider, ['google', 'facebook'], true), 404);
+        abort_unless(in_array($provider, ['google', 'facebook', 'github'], true), 404);
     }
 }

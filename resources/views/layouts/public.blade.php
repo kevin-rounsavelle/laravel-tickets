@@ -27,9 +27,9 @@
         <div class="min-h-[100dvh] bg-slate-50 relative overflow-hidden flex flex-col justify-between">
             @if(!request()->routeIs('kb.*'))
             <div class="fixed inset-0 overflow-hidden pointer-events-none">
-                <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-indigo-900/40 to-violet-800/30 blur-3xl opacity-60"></div>
+                <div class="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-indigo-200/15 blur-3xl opacity-40"></div>
 
-                <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-indigo-950/50 to-purple-900/30 blur-3xl opacity-50"></div>
+                <div class="absolute top-[40%] right-[-15%] w-[50vw] h-[50vw] rounded-full bg-violet-200/10 blur-3xl opacity-35"></div>
             </div>
             @endif
             

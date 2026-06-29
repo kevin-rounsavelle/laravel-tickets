@@ -149,10 +149,17 @@
                                         {{ $ticket->updated_at->diffForHumans() }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{ route('admin.tickets.show', $ticket) }}" wire:navigate 
-                                           class="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 hover:text-slate-900 transition-all">
-                                            Manage
-                                        </a>
+                                        <div class="flex items-center justify-end gap-2">
+                                            <a href="{{ route('admin.tickets.show', $ticket) }}" wire:navigate 
+                                               class="inline-flex items-center justify-center rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-white hover:bg-slate-50 hover:text-slate-900 transition-all">
+                                                Manage
+                                            </a>
+                                            <button wire:click="deleteTicket({{ $ticket->id }})" 
+                                                    wire:confirm="Are you sure you want to delete ticket #{{ $ticket->id }}? This action cannot be undone."
+                                                    class="inline-flex items-center justify-center rounded-lg border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-700 bg-white hover:bg-red-50 hover:text-red-900 transition-all">
+                                                Delete
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty

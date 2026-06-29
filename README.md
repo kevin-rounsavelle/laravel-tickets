@@ -469,12 +469,14 @@ Supports:
 
 - Google
 - Facebook
+- GitHub (Note: If using a GitHub App, the app **must** have **"Email addresses"** selected under *Permissions > Account permissions* in your App settings under *Settings > Developer settings > GitHub Apps > [App Name] > Permissions & Events*)
 
 
 Generate your domain's social login app credentials through:
 
 - Google Developer Console
 - Meta Developer Console
+- GitHub Developer Settings (OAuth Apps / GitHub Apps)
 
 
 Add:
@@ -485,6 +487,9 @@ GOOGLE_CLIENT_SECRET=
 
 FACEBOOK_CLIENT_ID=
 FACEBOOK_CLIENT_SECRET=
+
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
 ```
 
 
@@ -494,7 +499,14 @@ Callback URLs:
 {APP_URL}/auth/google/callback
 
 {APP_URL}/auth/facebook/callback
+
+{APP_URL}/auth/github/callback
 ```
+
+### Missing Email Address Fallback
+If a social provider does not provide the user's email address (e.g. if the user's email is set to private on GitHub), the user is temporarily redirected to `/auth/collect-email` to supply a valid, unique email address.
+- Direct social registration (where email is provided) automatically sets `email_verified_at` to `now()`.
+- Social registration where the email is collected manually keeps `email_verified_at` as `null` so they must verify their email.
 
 ---
 

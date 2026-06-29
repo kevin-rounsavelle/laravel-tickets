@@ -28,6 +28,16 @@ class AdminDashboard extends Component
         $this->resetPage();
     }
 
+    public function deleteTicket(int $ticketId): void
+    {
+        abort_unless(auth()->user()->isAdmin(), 403);
+
+        $ticket = Ticket::findOrFail($ticketId);
+        $ticket->delete();
+
+        session()->flash('status', 'Ticket #' . $ticketId . ' deleted successfully.');
+    }
+
     public function render(): View
     {
         $tickets = Ticket::query()

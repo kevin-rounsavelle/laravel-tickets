@@ -53,6 +53,12 @@ return [
         'redirect' => env('APP_URL') . '/auth/facebook/callback',
     ],
 
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('APP_URL') . '/auth/github/callback',
+    ],
+
     'inbound' => [
     'secret' => env('INBOUND_WEBHOOK_SECRET'),
     ],
