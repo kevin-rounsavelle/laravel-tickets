@@ -1,42 +1,29 @@
-# Application Routes Reference
+# Routes Reference
 
 ## Public
 
-| Route | Purpose |
-|---|---|
-| `/kb` | Knowledge Base landing page |
-| `/kb/{seo_link}` | View Knowledge Base article |
-| `/tickets/view/{token}` | Secure ticket access |
-| `/login` | Login |
-| `/register` | Registration |
+- `/login` - Login
+- `/register` - Registration
+- `/kb` - Knowledge Base
+- `/tickets/view/{token}` - Secure ticket access
 
-## Customers
+## Public Users
 
-| Route | Purpose |
-|---|---|
-| `/dashboard` | Customer dashboard |
-| `/tickets/create` | Create support ticket |
-| `/tickets/{id}` | View ticket |
-| `/profile` | User profile |
+- `/dashboard` - Customer dashboard
+- `/tickets/create` - Create ticket
+- `/tickets/{id}` - View ticket
 
 ## Team Members
 
-| Route | Purpose |
-|---|---|
-| `/admin/assigned-tickets` | Assigned ticket queue |
-| `/admin/tickets/{id}` | Ticket response and management |
+- `/admin/assigned-tickets` - Assigned tickets
+- `/admin/tickets/{id}` - Ticket management
 
 ## Administrators
 
-| Route | Purpose |
-|---|---|
-| `/admin/tickets` | Ticket administration |
-| `/admin/users` | User management |
-| `/admin/kb` | Knowledge Base management |
-| `/admin/kb/categories` | KB category management |
+- `/admin/users`
+- `/admin/kb`
+- `/admin/kb/categories`
 
 ## Integrations
 
-| Route | Purpose |
-|---|---|
-| `POST /webhooks/inbound-email` | Email reply processing webhook |
+- `POST /webhooks/inbound-email`

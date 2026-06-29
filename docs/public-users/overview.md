@@ -1,16 +1,12 @@
 # Public Users
 
-Public users are customers using the helpdesk system.
+## Documentation
 
-Users can:
-
-- Submit tickets
-- Upload attachments
-- View ticket history
-- Reply to conversations
-- Use secure ticket links
-- Browse the Knowledge Base
-
-Dashboard:
-
-`/dashboard`
+- [Account](account.md)
+- [Dashboard](dashboard.md)
+- [Creating Tickets](creating-tickets.md)
+- [Viewing Tickets](viewing-tickets.md)
+- [Replying](replying.md)
+- [Email Replies](email-replies.md)
+- [Secure Links](secure-links.md)
+- [Knowledge Base](knowledge-base.md)

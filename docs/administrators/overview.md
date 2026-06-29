@@ -1,11 +1,9 @@
 # Administrators
 
-Administrators manage the helpdesk platform.
+## Documentation
 
-Administration areas include:
-
-- Users
-- Roles
-- Tickets
-- Knowledge Base
-- Integrations
+- [Users](users.md)
+- [Roles](roles.md)
+- [Tickets](tickets.md)
+- [Knowledge Base](knowledge-base.md)
+- [Content](content.md)

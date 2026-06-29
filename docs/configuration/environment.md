@@ -1,20 +1,15 @@
-# Environment Configuration
+# Environment
 
-Common settings:
+Common values:
 
 ```env
 APP_URL=
 DB_DATABASE=
 MAIL_MAILER=
+FILESYSTEM_DISK=
 ```
 
-Email reply processing:
-
-```env
-INBOUND_WEBHOOK_SECRET=
-```
-
-Clear configuration cache after changes:
+After changes:
 
 ```bash
 php artisan config:clear

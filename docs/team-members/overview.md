@@ -1,15 +1,8 @@
 # Team Members
 
-Team members are support agents.
+## Documentation
 
-They can:
-
-- View assigned tickets
-- Reply to customers
-- Update ticket progress
-
-Team members cannot:
-
-- Delete tickets
-- Manage users
-- Access unrelated assignments
+- [Assigned Tickets](assigned-tickets.md)
+- [Replying](replying.md)
+- [Workflow](workflow.md)
+- [Permissions](permissions.md)

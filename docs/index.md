@@ -1,15 +1,24 @@
 # Laravel 13 Livewire Helpdesk Documentation
 
-Documentation for the Laravel 13 Livewire Helpdesk & Email Ticketing System.
+Welcome to the Laravel 13 Livewire Helpdesk documentation.
 
-## Sections
+## Getting Started
 
-- [Installation](installation/install.md)
-- [Configuration](configuration/environment.md)
+- [Installation](installation/overview.md)
+- [Configuration](configuration/overview.md)
+- [Deployment](deployment/overview.md)
+
+## User Documentation
+
 - [Public Users](public-users/overview.md)
 - [Team Members](team-members/overview.md)
 - [Administrators](administrators/overview.md)
-- [Integrations](integrations/social-login.md)
-- [Deployment](deployment/production.md)
+
+## Integrations
+
+- [Integrations Overview](integrations/overview.md)
+
+## Reference
+
 - [Routes](routes.md)
-- [Troubleshooting](troubleshooting/common-errors.md)
+- [Troubleshooting](troubleshooting/overview.md)
