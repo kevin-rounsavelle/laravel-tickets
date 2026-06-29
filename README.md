@@ -583,7 +583,7 @@ php artisan config:clear
 
 ---
 
-# Recommended Apache Alias Setup
+# Recommended Apache Alias Setup For Subdirectory Installs
 
 Example:
 
@@ -606,7 +606,7 @@ Require all granted
 
 ---
 
-# SSL Alias Example
+# SSL Alias Example For Subdirectory Installs
 
 ```apache
 <VirtualHost *:443>
@@ -627,7 +627,7 @@ SSLCertificateKeyFile /etc/pki/tls/private/example.key
 
 ---
 
-# Update Public .htaccess
+# Update Public .htaccess Example For Subdirectory Installs
 
 Edit:
 
