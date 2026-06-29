@@ -35,6 +35,9 @@ class KbArticleForm extends Form
     #[Validate]
     public int $sort_order = 0;
 
+    #[Validate]
+    public int $kb_rating = 0;
+
     public function rules(): array
     {
         return [
@@ -52,6 +55,7 @@ class KbArticleForm extends Form
             'article_active'   => ['required', 'integer', Rule::in([0, 1])],
             'show_date'        => ['required', 'boolean'],
             'sort_order'       => ['required', 'integer', 'min:0'],
+            'kb_rating'        => ['required', 'integer'],
         ];
     }
 
@@ -60,6 +64,7 @@ class KbArticleForm extends Form
         return [
             'seo_link' => 'SEO link (slug)',
             'article_active' => 'status',
+            'kb_rating' => 'KB rating',
         ];
     }
 
@@ -74,6 +79,7 @@ class KbArticleForm extends Form
         $this->article_active   = $article->article_active;
         $this->show_date        = $article->show_date ?? true;
         $this->sort_order       = $article->sort_order ?? 0;
+        $this->kb_rating        = $article->kb_rating ?? 0;
     }
 
     public function store(): KbArticle
@@ -91,6 +97,7 @@ class KbArticleForm extends Form
             'article_active'   => $this->article_active,
             'show_date'        => $this->show_date,
             'sort_order'       => $this->sort_order,
+            'kb_rating'        => $this->kb_rating,
             'date_added'       => $nowStr,
             'date_modified'    => $nowStr,
         ]);
@@ -109,6 +116,7 @@ class KbArticleForm extends Form
             'article_active'   => $this->article_active,
             'show_date'        => $this->show_date,
             'sort_order'       => $this->sort_order,
+            'kb_rating'        => $this->kb_rating,
             'date_modified'    => now()->format('Y-m-d H:i:s'),
         ]);
     }

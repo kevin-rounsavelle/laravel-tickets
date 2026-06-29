@@ -159,12 +159,21 @@
                             </div>
 
                             <div>
-                                <x-input-label for="sort_order" :value="__('Sort Order (Admin Only)')" class="text-slate-500 text-xs font-semibold uppercase tracking-wider" />
+                                <x-input-label for="sort_order" :value="__('Sort Order')" class="text-slate-500 text-xs font-semibold uppercase tracking-wider" />
                                 <x-text-input wire:model="form.sort_order" id="sort_order" type="number"
                                               class="mt-1 block w-full rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
                                               placeholder="0" />
                                 <p class="text-slate-400 text-[10px] mt-1">Lower numbers appear first.</p>
                                 <x-input-error :messages="$errors->get('form.sort_order')" class="mt-1.5 text-xs" />
+                            </div>
+
+                            <div class="mt-4">
+                                <x-input-label for="kb_rating" :value="__('KB Rating')" class="text-slate-500 text-xs font-semibold uppercase tracking-wider" />
+                                <x-text-input wire:model="form.kb_rating" id="kb_rating" type="number"
+                                              class="mt-1 block w-full rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 text-sm"
+                                              placeholder="0" />
+                                <p class="text-slate-400 text-[10px] mt-1">This represents the rating score (likes minus dislikes).</p>
+                                <x-input-error :messages="$errors->get('form.kb_rating')" class="mt-1.5 text-xs" />
                             </div>
                         </div>
                     </div>
