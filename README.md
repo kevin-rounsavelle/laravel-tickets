@@ -563,7 +563,7 @@ Livewire requires additional configuration when running behind a domain alias. '
 
 ---
 
-# Environment Configuration
+# Environment Configuration For Subdirectory Installs
 
 Update:
 
