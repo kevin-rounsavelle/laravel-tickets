@@ -635,52 +635,18 @@ ASSET_URL=https://example.com/support
 
 ---
 
-# Livewire Subdirectory Route
+# Livewire Subdirectory Configuration
 
-Edit:
+When deploying the application in a subdirectory (for example, `/support/`), configure the `LIVEWIRE_SUBDIRECTORY` environment variable in your `.env` file:
 
-```
-app/Providers/AppServiceProvider.php
-```
-
-
-Add:
-
-```php
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Route;
+```env
+LIVEWIRE_SUBDIRECTORY=/support/
 ```
 
-
-Inside boot():
-
-```php
-Livewire::setUpdateRoute(function ($handle) {
-
-return Route::post(
-'/support/livewire/update',
-$handle
-);
-
-});
-```
-
-
----
-
-# Edit Livewire Config
-
-Add the following to config/livewire.php
-
-```php
-'asset_url' => env('APP_URL') . '/livewire/livewire.js',
-```
-
-
-Clear cache:
+After modifying your environment configuration, you must clear the configuration cache for changes to take effect:
 
 ```bash
-php artisan optimize:clear
+php artisan config:clear
 ```
 
 ---
