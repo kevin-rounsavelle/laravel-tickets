@@ -272,6 +272,14 @@ Supported providers:
 | Email | Webhook Based Processing |
 | User Roles | DB-driven `user_roles` lookup table |
 
+### Key PHP (Composer) Dependencies
+
+- **`laravel/framework`** (`^13.0`): The core PHP MVC framework.
+- **`livewire/livewire`** (`^3.6`): Framework for building dynamic, reactive interfaces directly in PHP.
+- **`livewire/volt`** (`^1.7`): Single-file Livewire components declarative API.
+- **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
+- **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
+- **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
 
 ---
 
