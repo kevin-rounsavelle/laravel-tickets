@@ -524,7 +524,7 @@ Callback URLs:
 ```
 
 ### Missing Email Address Fallback
-If a social provider does not provide the user's email address (e.g. if the user's email is set to private on GitHub), the user is temporarily redirected to `/auth/collect-email` to supply a valid, unique email address.
+If a social provider does not provide the user's email address, the user is temporarily redirected to `/auth/collect-email` to supply a valid, unique email address.
 - Direct social registration (where email is provided) automatically sets `email_verified_at` to `now()`.
 - Social registration where the email is collected manually keeps `email_verified_at` as `null` so they must verify their email.
 
