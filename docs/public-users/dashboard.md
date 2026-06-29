@@ -1,3 +1,0 @@
-# Dashboard
-
-Customer dashboard: `/dashboard`
