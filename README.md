@@ -563,6 +563,26 @@ Livewire requires additional configuration when running behind a domain alias. '
 
 ---
 
+# Environment Configuration
+
+Update:
+
+```env
+APP_URL=https://example.com/support
+
+ASSET_URL=https://example.com/support
+
+LIVEWIRE_SUBDIRECTORY=/support
+```
+
+After modifying your environment configuration, you must clear the configuration cache for changes to take effect:
+
+```bash
+php artisan config:clear
+```
+
+---
+
 # Recommended Apache Alias Setup
 
 Example:
@@ -621,34 +641,6 @@ Add:
 RewriteEngine On
 RewriteBase /support/
 ```
-
-# Environment Configuration
-
-Update:
-
-```env
-APP_URL=https://example.com/support
-
-ASSET_URL=https://example.com/support
-```
-
-
----
-
-# Livewire Subdirectory Configuration
-
-When deploying the application in a subdirectory (for example, `/support/`), configure the `LIVEWIRE_SUBDIRECTORY` environment variable in your `.env` file:
-
-```env
-LIVEWIRE_SUBDIRECTORY=/support/
-```
-
-After modifying your environment configuration, you must clear the configuration cache for changes to take effect:
-
-```bash
-php artisan config:clear
-```
-
 ---
 
 # Routes
