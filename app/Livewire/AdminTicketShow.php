@@ -34,7 +34,14 @@ class AdminTicketShow extends Component
 
     public function mount(Ticket $ticket): void
     {
-        abort_unless(auth()->user()->isAdmin(), 403);
+        $user = auth()->user();
+        if ($user->isAdmin()) {
+            // Allow all admins
+        } elseif ($user->isAgent() && $ticket->assigned_to === $user->id) {
+            // Allow agent if ticket is assigned to them
+        } else {
+            abort(403, 'Unauthorized access to this ticket.');
+        }
 
         $this->ticket = $ticket->load(['user', 'assignee', 'attachments', 'replies.user', 'replies.attachments']);
         $this->status = $ticket->status->value;
@@ -76,6 +83,11 @@ class AdminTicketShow extends Component
         $this->ticket->refresh()->load(['user', 'assignee']);
 
         session()->flash('status', 'Ticket status updated.');
+
+        if (!auth()->user()->isAdmin() && (int)$this->assigned_to !== auth()->id()) {
+            session()->flash('status', 'Ticket reassigned successfully.');
+            $this->redirectRoute('admin.assigned-tickets', navigate: true);
+        }
     }
 
     public function reply(

@@ -27,7 +27,7 @@ class TicketAttachmentController extends Controller
 
         $user = request()->user();
 
-        if ($user && ($user->isAdmin() || $ticket->user_id === $user->id)) {
+        if ($user && ($user->isAdmin() || $ticket->user_id === $user->id || ($user->isAgent() && $ticket->assigned_to === $user->id))) {
             return;
         }
 

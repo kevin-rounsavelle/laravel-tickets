@@ -38,9 +38,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('tickets/{ticket}/attachments/{attachment}', [TicketAttachmentController::class, 'download'])
         ->name('tickets.attachments.download');
 
+    Route::middleware('staff')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('tickets/{ticket}', AdminTicketShow::class)->name('tickets.show');
+        Route::get('assigned-tickets', \App\Livewire\TeamMember\Tickets::class)->name('assigned-tickets');
+    });
+
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('tickets', AdminDashboard::class)->name('dashboard');
-        Route::get('tickets/{ticket}', AdminTicketShow::class)->name('tickets.show');
 
         Route::get('users', AdminUsers::class)->name('users');
         Route::get('users/create', AdminCreateUser::class)->name('users.create');

@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div class="flex items-center gap-3">
-                <a href="{{ route('admin.dashboard') }}" wire:navigate class="p-2 rounded-xl border border-slate-200 bg-white text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors shadow-sm">
+                <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('admin.assigned-tickets') }}" wire:navigate class="p-2 rounded-xl border border-slate-200 bg-white text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-colors shadow-sm">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 </a>
                 <div>
@@ -54,7 +54,7 @@
                         
                         @forelse ($ticket->replies as $reply)
                             @php
-                                $isSupport = $reply->user?->isAdmin();
+                                $isSupport = $reply->user?->isStaff();
                             @endphp
                             <div class="bg-white border shadow-sm rounded-2xl p-6 sm:p-8 transition-all hover:shadow-md {{ $isSupport ? 'border-indigo-150 bg-indigo-50/20' : 'border-slate-200/70' }}">
                                 <div class="flex items-center justify-between pb-3 border-b border-slate-100/80 mb-4">
@@ -207,6 +207,7 @@
                         </div>
                     </div>
 
+                    @if (auth()->user()->isAdmin())
                     {{-- Danger Zone --}}
                     <div class="bg-white border border-rose-200 shadow-sm rounded-2xl p-6"
                          x-data="{ confirming: false }">
@@ -246,6 +247,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

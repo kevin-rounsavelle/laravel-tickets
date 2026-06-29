@@ -38,6 +38,14 @@ new class extends Component
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') || (request()->routeIs('tickets.*') && !request()->routeIs('tickets.public'))" wire:navigate class="text-sm font-semibold transition-all">
                         {{ __('My Tickets') }}
                     </x-nav-link>
+                    @if (auth()->user()->isAgent())
+                        <x-nav-link :href="route('admin.assigned-tickets')" :active="request()->routeIs('admin.assigned-tickets')" wire:navigate class="text-sm font-semibold transition-all text-indigo-600">
+                            <span class="flex items-center gap-1.5">
+                                <span class="h-1.5 w-1.5 rounded-full bg-indigo-600"></span>
+                                {{ __('Assigned Tickets') }}
+                            </span>
+                        </x-nav-link>
+                    @endif
                     @if (auth()->user()->isAdmin())
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard') || request()->routeIs('admin.tickets.*')" wire:navigate class="text-sm font-semibold transition-all text-violet-600">
                             <span class="flex items-center gap-1.5">
@@ -110,6 +118,11 @@ new class extends Component
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard') || (request()->routeIs('tickets.*') && !request()->routeIs('tickets.public'))" wire:navigate>
                 {{ __('My Tickets') }}
             </x-responsive-nav-link>
+            @if (auth()->user()->isAgent())
+                <x-responsive-nav-link :href="route('admin.assigned-tickets')" :active="request()->routeIs('admin.assigned-tickets')" wire:navigate class="text-indigo-600">
+                    {{ __('Assigned Tickets') }}
+                </x-responsive-nav-link>
+            @endif
             @if (auth()->user()->isAdmin())
                 <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard') || request()->routeIs('admin.tickets.*')" wire:navigate class="text-violet-600">
                     {{ __('Admin Console') }}
