@@ -280,7 +280,7 @@ Supported providers:
 * **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
 * **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
 * **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
-* **`openai-php/laravel`** (`^0.18`): Laravel wrapper for integrating OpenAI API functionality.
+* **`openai-php/client`** (`^0.20.0`): PHP client library for integrating OpenAI API functionality.
 
 ---
 
