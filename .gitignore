@@ -102,3 +102,6 @@ auth.json
 
 Homestead.json
 Homestead.yaml
+
+# Custom AI Includes
+/app/Includes/ai_ticket_response.php

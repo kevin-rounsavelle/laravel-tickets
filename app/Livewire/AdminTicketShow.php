@@ -29,6 +29,8 @@ class AdminTicketShow extends Component
 
     public string $body = '';
 
+    public string $aiResponse = '';
+
     /** @var array<int, \Livewire\Features\SupportFileUploads\TemporaryUploadedFile> */
     public array $attachments = [];
 
@@ -136,11 +138,30 @@ class AdminTicketShow extends Component
         $this->redirectRoute('admin.dashboard', navigate: true);
     }
 
+    public function generateAiResponse(): void
+    {
+        if (empty(config('ai.ai_provider')) || !function_exists('ai_ticket_response')) {
+            return;
+        }
+
+        $previousEntry = $this->ticket->replies->isNotEmpty()
+            ? $this->ticket->replies->last()->body
+            : $this->ticket->description;
+
+        $this->aiResponse = ai_ticket_response($previousEntry);
+    }
+
+    public function copyAiResponse(): void
+    {
+        $this->body = $this->aiResponse;
+    }
+
     public function render(): View
     {
         return view('livewire.admin-ticket-show', [
             'admins'   => User::query()->whereIn('role_id', [\App\Enums\UserRole::Agent->value, \App\Enums\UserRole::Admin->value])->orderBy('name')->get(),
             'statuses' => TicketStatus::cases(),
+            'showAiButton' => !empty(config('ai.ai_provider')) && function_exists('ai_ticket_response'),
         ]);
     }
 }

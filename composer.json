@@ -13,6 +13,7 @@
         "league/flysystem-aws-s3-v3": "^3.35",
         "livewire/livewire": "^3.6.4",
         "livewire/volt": "^1.7.0",
+        "openai-php/client": "^0.20.0",
         "zbateson/mail-mime-parser": "^4.0"
     },
     "require-dev": {

@@ -89,11 +89,46 @@
                     <div class="bg-white border border-slate-200/70 shadow-sm rounded-2xl p-6 sm:p-8">
                         <h3 class="font-bold text-slate-800 text-lg">Send Reply to Customer</h3>
                         <form wire:submit="reply" class="mt-4 space-y-4">
-                            <div>
-                                <textarea wire:model="body" rows="5"
-                                          class="block w-full rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 text-sm shadow-sm"
-                                          placeholder="Type your reply to customer..."></textarea>
-                                <x-input-error :messages="$errors->get('body')" class="mt-2 text-xs" />
+                            @if (!empty($aiResponse))
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 mb-4 space-y-2 animate-fade-in">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                            AI Suggested Response
+                                        </span>
+                                        <button type="button" wire:click="copyAiResponse" class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors border border-indigo-150 shadow-sm">
+                                            Copy to Reply
+                                        </button>
+                                    </div>
+                                    <textarea readonly rows="4" class="block w-full rounded-xl border-slate-200 bg-white text-sm text-slate-600 shadow-sm focus:ring-0 focus:border-slate-200">{{ $aiResponse }}</textarea>
+                                </div>
+                            @endif
+
+                            <div class="flex gap-4 items-start">
+                                <div class="flex-1">
+                                    <textarea wire:model="body" rows="5"
+                                              class="block w-full rounded-xl border-slate-200 focus:border-indigo-500 focus:ring-indigo-500 text-sm shadow-sm"
+                                              placeholder="Type your reply to customer..."></textarea>
+                                    <x-input-error :messages="$errors->get('body')" class="mt-2 text-xs" />
+                                </div>
+                                @if ($showAiButton)
+                                    <button type="button" wire:click="generateAiResponse" wire:loading.attr="disabled"
+                                            class="inline-flex flex-col items-center justify-center px-4 rounded-xl border border-indigo-200 bg-indigo-50/50 hover:bg-indigo-50 text-indigo-600 transition-all shadow-sm self-stretch group min-w-[80px]"
+                                            title="Generate AI Response">
+                                        <span wire:loading.remove wire:target="generateAiResponse" class="flex flex-col items-center gap-1">
+                                            <svg class="w-5 h-5 text-indigo-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            </svg>
+                                            <span class="text-[10px] font-bold uppercase tracking-wider">AI Assist</span>
+                                        </span>
+                                        <span wire:loading wire:target="generateAiResponse">
+                                            <svg class="animate-spin h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                @endif
                             </div>
 
                             <!-- Attachments -->

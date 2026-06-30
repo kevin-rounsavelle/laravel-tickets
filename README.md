@@ -35,6 +35,7 @@ Before installing, make sure you have:
 - Composer
 - Node.js and npm
 - MySQL / MariaDB (or compatible database)
+- OpenAI PHP Client (`openai-php/client` composer package)
 
 ### Setup
 
@@ -694,6 +695,27 @@ Before deploying:
 - [ ] Set INBOUND_WEBHOOK_SECRET
 - [ ] Run php artisan optimize
 - [ ] Run npm run build
+
+---
+
+## AI Integrations
+
+The system includes built-in tools to integrate AI-assisted features for administrators and team members:
+
+### 1. KB Article AI Generator
+A tool designed to help write or rewrite customer-facing knowledge base articles based on custom prompts and existing draft content:
+* **How it works:** In both the KB Create and Edit pages, a prompt input box and generation button are provided. Clicking the **Generate with OPENAI** button sends the admin's custom instructions and current editor draft content to OpenAI, returning structured, formatted HTML content ready to copy to the editor.
+* **Requirements:** 
+  * You must configure `OPENAI_API_KEY` in your `.env` file.
+  * The helper file `app/Includes/ai_kb_article_content.php` (included in the repository) must be present.
+
+### 2. Ticket Reply Assistant (Optional)
+Suggests support response drafts based on the customer's support ticket description or the last reply:
+* **How it works:** A button is displayed next to the ticket reply editor that sends the ticket history to your custom AI completion provider and displays a preview response for the agent to review, edit, or copy.
+* **Important Context Check:** This feature should only be used if the KB articles or content specific to the ticket have been ingested by your specific AI RAG system already, so that the AI ticket reply suggestion has the necessary context to generate accurate help.
+* **Setup & Custom RAG Systems:** This feature is completely optional. To enable it, both of the following must be met:
+  * Set `AI_PROVIDER` (not null) in your `.env` file.
+  * Manually create the helper file `app/Includes/ai_ticket_response.php` defining the `ai_ticket_response(string $text): string` function. This file is gitignored and is not tracked in the repository, allowing developers to manually customize the connection code to third-party API RAG systems such as **Visperity**, **Algolia**, or **Google Vertex**.
 
 ---
 
