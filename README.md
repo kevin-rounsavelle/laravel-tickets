@@ -35,7 +35,6 @@ Before installing, make sure you have:
 - Composer
 - Node.js and npm
 - MySQL / MariaDB (or compatible database)
-- OpenAI PHP Client (`openai-php/client` composer package)
 
 ### Setup
 
