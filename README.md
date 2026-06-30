@@ -563,7 +563,7 @@ RECAPTCHA_SECRET_KEY=
 
 The system includes built-in AI-assisted tools for administrators and support team members.
 
-### 1. KB Article AI Generator
+### KB Article AI Generator (OpenAI)
 
 Helps create or rewrite customer-facing Knowledge Base articles using custom prompts and existing draft content.
 
@@ -578,15 +578,9 @@ Add your OpenAI API key to your `.env` file:
 ```env
 OPENAI_API_KEY=your_api_key_here
 ```
-
-The following helper file must be present:
-
-```text
-app/Includes/ai_kb_article_content.php
-```
 ---
 
-### 2. Ticket Reply Assistant (Optional)
+Ticket Reply Assistant (Optional)
 
 Provides AI-generated support reply suggestions based on the ticket description and conversation history.
 
