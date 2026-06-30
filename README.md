@@ -559,6 +559,81 @@ RECAPTCHA_SECRET_KEY=
 
 ---
 
+## AI Integrations
+
+The system includes built-in AI-assisted tools for administrators and support team members.
+
+### 1. KB Article AI Generator
+
+Helps create or rewrite customer-facing Knowledge Base articles using custom prompts and existing draft content.
+
+**How it works:**
+
+On the KB Create and Edit pages, administrators can enter a prompt and use the **Generate with OpenAI** button. The system sends the custom instructions and current draft content to OpenAI and returns structured, formatted HTML content ready to insert into the editor.
+
+**Requirements:**
+
+Add your OpenAI API key to your `.env` file:
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+The following helper file must be present:
+
+```text
+app/Includes/ai_kb_article_content.php
+```
+---
+
+### 2. Ticket Reply Assistant (Optional)
+
+Provides AI-generated support reply suggestions based on the ticket description and conversation history.
+
+**How it works:**
+
+A button is available next to the ticket reply editor. When used, the ticket history is sent to your configured AI completion provider and a suggested response is generated for the agent to review, edit, or copy.
+
+> **Important:** This feature works best when your Knowledge Base content or ticket-specific documentation has already been ingested into your AI RAG system. This allows the AI provider to generate responses with the proper context.
+
+### Setup & Custom RAG Systems
+
+This feature is completely optional and designed to support custom AI providers.
+
+To enable it, configure your provider details in your `.env` file: The AI_PROVIDER variable cannot be empty if using third party connector code but it can be anything since it is used only as a on/off check for this feature.
+
+```env
+AI_PROVIDER=your_provider_name
+AI_PROVIDER_API_KEY=your_api_key_here
+AI_PROVIDER_ACCOUNT_ID=your_account_id_here
+```
+
+Then create the following custom helper file:
+
+```text
+app/Includes/ai_ticket_response.php
+```
+
+The file must define the following function:
+
+```php
+ai_ticket_response(string $text): string
+```
+
+The configured `.env` values are available inside this function and can be used to authenticate and connect to your preferred AI/RAG provider.
+
+This file is intentionally gitignored and not included in the repository, allowing developers to customize the integration with their preferred AI service.
+
+Examples of systems that can be connected include:
+
+- Visperity
+- Algolia
+- Google Vertex AI
+- Other custom AI completion or RAG services
+
+```
+```
+
 # Subdirectory Deployment Support
 
 The application supports:
@@ -696,69 +771,6 @@ Before deploying:
 - [ ] Run php artisan optimize
 - [ ] Run npm run build
 
----
-
-## AI Integrations
-
-The system includes built-in AI-assisted tools for administrators and support team members.
-
-### 1. KB Article AI Generator
-
-Helps create or rewrite customer-facing Knowledge Base articles using custom prompts and existing draft content.
-
-**How it works:**
-
-On the KB Create and Edit pages, administrators can enter a prompt and use the **Generate with OpenAI** button. The system sends the custom instructions and current draft content to OpenAI and returns structured, formatted HTML content ready to insert into the editor.
-
-**Requirements:**
-
-Add your OpenAI API key to your `.env` file:
-
-```env
-OPENAI_API_KEY=your_api_key_here
-```
----
-
-### 2. Ticket Reply Assistant (Optional)
-
-Provides AI-generated support reply suggestions based on the ticket description and conversation history.
-
-**How it works:**
-
-A button is available next to the ticket reply editor. When used, the ticket history is sent to your configured AI completion provider and a suggested response is generated for the agent to review, edit, or copy.
-
-> **Important:** This feature works best when your Knowledge Base content or ticket-specific documentation has already been ingested into your AI RAG system. This allows the AI provider to generate responses with the proper context.
-
-### Setup & Custom RAG Systems
-
-This feature is completely optional. To enable it:
-
-1. Configure an AI provider in your `.env` file:
-
-```env
-AI_PROVIDER=your_provider_name
-```
-
-2. Create the following custom helper file:
-
-```text
-app/Includes/ai_ticket_response.php
-```
-
-The file must define the following function:
-
-```php
-ai_ticket_response(string $text): string
-```
-
-This file is intentionally gitignored and not included in the repository, allowing developers to customize the integration with their preferred AI/RAG provider.
-
-Examples of systems that can be connected include:
-
-- Visperity
-- Algolia
-- Google Vertex AI
-- Other custom AI completion or RAG services
 ---
 
 # License
