@@ -275,12 +275,13 @@ Supported providers:
 
 ### Key PHP (Composer) Dependencies
 
-- **`laravel/framework`** (`^13.0`): The core PHP MVC framework.
-- **`livewire/livewire`** (`^3.6`): Framework for building dynamic, reactive interfaces directly in PHP.
-- **`livewire/volt`** (`^1.7`): Single-file Livewire components declarative API.
-- **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
-- **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
-- **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
+* **`laravel/framework`** (`^13.0`): The core PHP MVC framework.
+* **`livewire/livewire`** (`^3.6`): Framework for building dynamic, reactive interfaces directly in PHP.
+* **`livewire/volt`** (`^1.7`): Single-file Livewire components with a declarative API.
+* **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
+* **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
+* **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
+* **`openai-php/laravel`** (`^0.18`): Laravel wrapper for integrating OpenAI API functionality.
 
 ---
 
@@ -580,7 +581,7 @@ OPENAI_API_KEY=your_api_key_here
 ```
 ---
 
-Ticket Reply Assistant (Optional)
+### Ticket Reply Assistant (Optional)
 
 Provides AI-generated support reply suggestions based on the ticket description and conversation history.
 
