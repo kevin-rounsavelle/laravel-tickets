@@ -45,7 +45,7 @@ Designed for SaaS applications and support teams requiring a complete customer s
 - [Email Configuration](#email-configuration)
 - [Email Reply Webhook](#email-reply-webhook)
   - [Cloudflare Email Worker Setup](#cloudflare-email-worker-setup)
-  - [File Upload Configuration to CDN (S3 | Cloudfront)](#file-upload-configuration-to-cdn-s3--cloudfront)
+- [File Upload Configuration to CDN (S3 | Cloudfront)](#file-upload-configuration-to-cdn-s3--cloudfront)
 - [Social Login Setup](#social-login-setup)
   - [Missing Email Address Fallback](#missing-email-address-fallback)
 - [Google reCAPTCHA Setup](#google-recaptcha-setup)
@@ -510,7 +510,7 @@ After saving the worker:
 4. Send a test email to verify the Laravel ticket reply is created
 ---
 
-### File Upload Configuration to CDN (S3 | Cloudfront)
+# File Upload Configuration to CDN (S3 | Cloudfront)
 
 Set `s3` as the filesystem (upload destination) in `.env`:
 
