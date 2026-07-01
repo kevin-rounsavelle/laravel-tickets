@@ -23,6 +23,72 @@ Designed for SaaS applications and support teams requiring a complete customer s
 
 ---
 
+## Table of Contents
+
+- [Technology Stack](#technology-stack)
+  - [Key PHP (Composer) Dependencies](#key-php-composer-dependencies)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Setup](#setup)
+- [Features](#features)
+  - [User Dashboard](#user-dashboard)
+  - [Admin Dashboard](#admin-dashboard)
+  - [Team Member Dashboard](#team-member-dashboard)
+  - [User Management (Admin Only)](#user-management-admin-only)
+  - [Knowledge Base (KB)](#knowledge-base-kb)
+  - [Ticket Status Workflow](#ticket-status-workflow)
+  - [Ticket Submission](#ticket-submission)
+  - [Email Notifications](#email-notifications)
+  - [Secure Ticket Links](#secure-ticket-links)
+  - [Email Based Ticket Replies](#email-based-ticket-replies)
+- [Demo Accounts](#demo-accounts)
+- [Email Configuration](#email-configuration)
+- [Email Reply Webhook](#email-reply-webhook)
+  - [Cloudflare Email Worker Setup](#cloudflare-email-worker-setup)
+  - [File Upload Configuration to CDN (S3 | Cloudfront)](#file-upload-configuration-to-cdn-s3--cloudfront)
+- [Social Login Setup](#social-login-setup)
+  - [Missing Email Address Fallback](#missing-email-address-fallback)
+- [Google reCAPTCHA Setup](#google-recaptcha-setup)
+- [AI Integrations](#ai-integrations)
+  - [KB Article AI Generator (OpenAI)](#kb-article-ai-generator-openai)
+  - [Ticket Reply Assistant (Optional)](#ticket-reply-assistant-optional)
+  - [Setup & Custom RAG Systems](#setup--custom-rag-systems)
+- [Subdirectory Deployment Support](#subdirectory-deployment-support)
+- [Environment Configuration For Subdirectory Installs](#environment-configuration-for-subdirectory-installs)
+- [Recommended Apache Alias Setup For Subdirectory Installs](#recommended-apache-alias-setup-for-subdirectory-installs)
+- [SSL Alias Example For Subdirectory Installs](#ssl-alias-example-for-subdirectory-installs)
+- [Update Public .htaccess Example For Subdirectory Installs](#update-public-htaccess-example-for-subdirectory-installs)
+- [Routes](#routes)
+- [Production Checklist](#production-checklist)
+- [License](#license)
+
+---
+
+# Technology Stack
+
+| Component | Technology |
+|---|---|
+| Framework | Laravel 13 |
+| UI | Livewire 3 + Volt |
+| CSS | Tailwind CSS |
+| Authentication | Laravel Auth + Socialite |
+| Build Tool | Vite |
+| Database | Laravel Supported Databases |
+| Email | Webhook Based Processing |
+| User Roles | DB-driven `user_roles` lookup table |
+
+### Key PHP (Composer) Dependencies
+
+* **`laravel/framework`** (`^13.0`): The core PHP MVC framework.
+* **`livewire/livewire`** (`^3.6`): Framework for building dynamic, reactive interfaces directly in PHP.
+* **`livewire/volt`** (`^1.7`): Single-file Livewire components with a declarative API.
+* **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
+* **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
+* **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
+* **`openai-php/client`** (`^0.20.0`): PHP client library for integrating OpenAI API functionality.
+
+---
+
 ## Installation
 
 This application is a standard Laravel 13 application using Livewire, Volt, and Tailwind CSS.
@@ -255,34 +321,6 @@ Supported providers:
 - Cloudflare Email Routing
 - Mailgun
 - Postmark
-
-
----
-
-# Technology Stack
-
-| Component | Technology |
-|---|---|
-| Framework | Laravel 13 |
-| UI | Livewire 3 + Volt |
-| CSS | Tailwind CSS |
-| Authentication | Laravel Auth + Socialite |
-| Build Tool | Vite |
-| Database | Laravel Supported Databases |
-| Email | Webhook Based Processing |
-| User Roles | DB-driven `user_roles` lookup table |
-
-### Key PHP (Composer) Dependencies
-
-* **`laravel/framework`** (`^13.0`): The core PHP MVC framework.
-* **`livewire/livewire`** (`^3.6`): Framework for building dynamic, reactive interfaces directly in PHP.
-* **`livewire/volt`** (`^1.7`): Single-file Livewire components with a declarative API.
-* **`laravel/socialite`** (`^5.28`): Package for handling OAuth social logins (Google, Facebook, GitHub).
-* **`league/flysystem-aws-s3-v3`** (`^3.35`): AWS S3 integration for remote file/media uploads.
-* **`zbateson/mail-mime-parser`** (`^4.0`): Mail MIME parser to decode raw inbound email webhook payloads.
-* **`openai-php/client`** (`^0.20.0`): PHP client library for integrating OpenAI API functionality.
-
----
 
 
 # Demo Accounts
